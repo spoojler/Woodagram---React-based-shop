@@ -38,7 +38,6 @@ const ProductsList = () => {
 };
 
 export default ProductsList;
-// import { getDocs } from 'firebase/firestore';
 // import { useState, useEffect } from 'react';
 // import { productsCollection } from '../firebaseData';
 // import ProductCard from './ProductCard';
