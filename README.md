@@ -4,7 +4,7 @@ Woodagram is a simple web store, build with mobile-first concept. Layout is simp
 App provide handling users, fetching products data from Firebase and carry on customer basket. \
 You can add products to shopping cart and watch summary.
 
-Stack: JS, React CRA, Tailwind CSS, Firebase. \ 
+Stack: JS, React CRA, Tailwind CSS, Firebase.  
 
 [DEMO] App is actually deployed: https://woodagram-42477.web.app 
 
