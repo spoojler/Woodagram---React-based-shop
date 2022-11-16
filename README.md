@@ -5,6 +5,7 @@ App provide handling users, fetching products data from Firebase and carry on cu
 You can add products to shopping cart and watch summary.
 
 Stack: JS, React CRA, Tailwind CSS, Firebase. \ 
+
 [DEMO] App is actually deployed: https://woodagram-42477.web.app 
 
 The aplication uses: 
