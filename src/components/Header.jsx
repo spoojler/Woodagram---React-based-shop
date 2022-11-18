@@ -1,12 +1,16 @@
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BASKET } from '../constants/routes';
+import BasketContext from '../context/BasketContext';
 
 const Header = () => {
   const navigate = useNavigate();
+  const { productsBasket } = useContext(BasketContext);
   const handleBasketButton = (event) => {
     event.preventDefault();
     navigate(BASKET);
   };
+  const basketCount = productsBasket.length - 1;
 
   return (
     <div className="sticky top-0 flex justify-end pr-3 pt-2 bg-white border-b-2 border-gray-300">
@@ -21,7 +25,9 @@ const Header = () => {
         </h1>
       </div>
       <button onClick={handleBasketButton}>
-        <i className="fa-solid fa-basket-shopping text-4xl p-3 pr-5 text-blue-700 hover:text-blue-400"></i>
+        <i className="flex fa-solid fa-basket-shopping text-4xl pr-2 text-blue-700 hover:text-blue-400">
+          <div className="pl-1">{basketCount ? basketCount : ''}</div>
+        </i>
       </button>
     </div>
   );

@@ -4,6 +4,8 @@ import { DASHBOARD } from '../constants/routes';
 import SignUpComponent from './SignUpComponent';
 import { auth } from '../firebaseData';
 import { useNavigate } from 'react-router-dom';
+import CircleLoader from './CircleLoader';
+import useLoader from '../hooks/useLoader';
 
 const LoginComponent = () => {
   const navigate = useNavigate();
@@ -13,6 +15,7 @@ const LoginComponent = () => {
   const [error, setError] = useState('');
   const [signUpTrigger, setSignUpTrigger] = useState(false);
   const [signUpClicked, setSignUpClicked] = useState(false);
+  const { showLoader, setShowLoader } = useLoader();
 
   const handleEmailChange = (event) => {
     setEmailAdress(event.target.value);
@@ -22,17 +25,19 @@ const LoginComponent = () => {
   };
 
   const handleSubmit = (event) => {
+    setShowLoader(true);
     event.preventDefault();
     setSignUpClicked(!signUpClicked);
     if (signUpTrigger === false) {
       signInWithEmailAndPassword(auth, emailAdress, password)
         .then((result) => {
-          console.log('login succesfull');
+          console.log(showLoader);
           navigate(DASHBOARD);
         })
         .catch((error) => {
           console.log(error);
           setError(error);
+          setShowLoader(false);
         });
     }
   };
@@ -71,11 +76,15 @@ const LoginComponent = () => {
         required
       />
       <p className=" text-red-500 mb-3 bg-red-50 text-center">{isErrorText}</p>
-      <input
-        type="submit"
-        className="mx-auto text-lg w-1/3 min-w-fit text-white py-2 rounded-full mb-3 bg-blue-500"
-        value={logInButton}
-      />
+      {showLoader ? (
+        <CircleLoader />
+      ) : (
+        <input
+          type="submit"
+          className="cursor-pointer mx-auto text-lg w-1/3 min-w-fit text-white py-2 rounded-full mb-3 bg-blue-500"
+          value={logInButton}
+        />
+      )}
       <button onClick={showSignUp} className="mb-3 underline">
         {isErrorSignUpButton}
       </button>

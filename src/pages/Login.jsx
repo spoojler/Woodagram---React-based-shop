@@ -3,14 +3,14 @@ import { signInAnonymously, getAuth } from 'firebase/auth';
 import { DASHBOARD } from '../constants/routes';
 import LoginComponent from '../components/LoginComponent';
 
-const Login = () => {
-  document.body.classList.remove('bg-gray-100');
+document.body.classList.remove('bg-gray-100');
 
+const Login = () => {
   const auth = getAuth();
   const navigate = useNavigate();
-  const handleGuestLogin = (event) => {
+  const handleGuestLogin = async (event) => {
     event.preventDefault();
-    signInAnonymously(auth)
+    await signInAnonymously(auth)
       .then(() => {
         navigate(DASHBOARD);
       })

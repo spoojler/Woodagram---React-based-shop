@@ -1,3 +1,4 @@
+import CircleLoader from '../components/CircleLoader';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import ProductsList from '../components/ProductsList';
@@ -8,7 +9,7 @@ const Dashboard = () => {
     <div>
       <Header />
       <div className="flex flex-col h-screen w-screen">
-        <ProductsList />
+        {<ProductsList /> ? <ProductsList /> : <CircleLoader />}
       </div>
       <Footer />
     </div>
@@ -16,4 +17,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-

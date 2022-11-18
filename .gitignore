@@ -11,6 +11,7 @@
 # production
 /build
 /.firebase
+/src/firebaseConfig.js
 
 # misc
 .DS_Store

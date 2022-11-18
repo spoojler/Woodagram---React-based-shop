@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import CartContext from '../context/cartContext';
+import BasketContext from '../context/BasketContext';
 
 const ProductCard = (props) => {
-  const { productsBasket, setProductsBasket } = useContext(CartContext);
+  const { productsBasket, setProductsBasket } = useContext(BasketContext);
 
   const imageStyle = {
     backgroundImage: `url(${props.photo})`,

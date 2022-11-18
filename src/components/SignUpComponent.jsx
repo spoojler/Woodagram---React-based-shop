@@ -7,31 +7,39 @@ import {
 import { useEffect } from 'react';
 import { DASHBOARD } from '../constants/routes';
 import { useNavigate } from 'react-router-dom';
+import useLoader from '../hooks/useLoader';
 
 const SignUpComponent = ({ email, password, clicked }) => {
   const navigate = useNavigate();
   const auth = getAuth();
   const [userName, setUsername] = useState('');
+  const { setShowLoader } = useLoader();
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
   };
 
   useEffect(() => {
-    if (userName)
-      createUserWithEmailAndPassword(auth, email, password)
-        .then(() => {
-          updateProfile(auth.currentUser, { displayName: userName })
-            .then(() => {
-              navigate(DASHBOARD);
-            })
-            .catch((error) => {
-              console.log(error.message);
-            });
-        })
-        .catch((error) => {
-          console.log(error.message);
-        });
+    const signIn = async () => {
+      if (userName)
+        await createUserWithEmailAndPassword(auth, email, password)
+          .then(() => {
+            setShowLoader(true);
+            updateProfile(auth.currentUser, { displayName: userName })
+              .then(() => {
+                navigate(DASHBOARD);
+              })
+              .catch((error) => {
+                setShowLoader(false);
+                console.log(error.message);
+              });
+          })
+          .catch((error) => {
+            setShowLoader(false);
+            console.log(error.message);
+          });
+    };
+    signIn();
   }, [clicked]);
 
   return (

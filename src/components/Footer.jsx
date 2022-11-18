@@ -1,17 +1,34 @@
 import { signOut, getAuth } from 'firebase/auth';
+import { useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DASHBOARD, LOGIN } from '../constants/routes';
 
 const Footer = () => {
   const auth = getAuth();
   const navigate = useNavigate();
+  const [user, setUser] = useState('');
+  const [stranger, setStranger] = useState('');
 
   const toTheTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const { currentUser } = auth;
-  const { isAnonymous } = currentUser;
+  const setUserData = async (userAuth) => {
+    const { currentUser } = userAuth;
+    setUser(currentUser);
+    const { isAnonymous } = currentUser;
+    setStranger(isAnonymous);
+  };
+
+  useEffect(() => {
+    const getUser = async () => {
+      const userResult = async () => getAuth();
+      const userAuth = await userResult();
+      await setUserData(userAuth);
+    };
+    getUser();
+  }, [auth]);
 
   const handleLogOut = (event) => {
     event.preventDefault();
@@ -53,7 +70,7 @@ const Footer = () => {
       <button onClick={toTheTop} className="px-10 py-3">
         <i className="fa-solid fa-arrow-up text-3xl"></i>
       </button>
-      {isAnonymous ? newUserButton : logOutButton}
+      {stranger ? newUserButton : logOutButton}
     </div>
   );
 };

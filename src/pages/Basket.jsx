@@ -1,10 +1,10 @@
 import { useContext } from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import CartContext from '../context/cartContext';
+import BasketContext from '../context/BasketContext';
 
 const Basket = () => {
-  const { productsBasket } = useContext(CartContext);
+  const { productsBasket } = useContext(BasketContext);
 
   const productsList = productsBasket.map((product, index) => {
     return (
@@ -16,7 +16,7 @@ const Basket = () => {
   });
   let newPrice = 0;
   const finalPrice = productsBasket.map((product) => {
-    newPrice += product.price;
+    newPrice += Number(product.price);
     return;
   });
   return (
@@ -27,10 +27,11 @@ const Basket = () => {
           <h1 className="text-2xl">Shopping Cart</h1>
         </div>
         <div>{productsList}</div>
-        <div className="text-2xl border-t-2 border-gray-500 self-end text-blue-700">
+        <div className="text-2xl border-t-2 border-gray-500 self-end text-blue-700 break-all">
           {newPrice}$
         </div>
       </div>
+      <div className="h-16"></div>
       <Footer />
     </div>
   );

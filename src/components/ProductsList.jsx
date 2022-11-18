@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect} from 'react';
 import { getDocs } from 'firebase/firestore';
 import { productsCollection } from '../firebaseData';
 import ProductCard from './ProductCard';
@@ -14,7 +14,7 @@ const ProductsList = () => {
       });
     }
     fetchData();
-  },[]);
+  }, []);
 
   const productsFinalList = productSnapshots?.map((product, index) => {
     const productDetail = product.data();

@@ -1,10 +1,9 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore, addDoc, collection } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
+import { config } from './firebaseConfig';
 
-const config = {
-  //here paste your firebase config
-};
+//Create file called firebaseConfig.jsx and paste there config, or delete import and paste config here.
 
 const firebase = initializeApp(config);
 const db = getFirestore(firebase);
